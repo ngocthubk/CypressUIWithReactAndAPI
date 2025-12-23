@@ -14,6 +14,10 @@ export let home = {
 Cypress.Commands.add('login',(username, password ) => {
     cy.session([username, password],() => {
         cy.visit('/app/login')
+        cy.log('username is ' + username)
+        console.log('username is ' + username)
+        console.log('password is ' + password)
+        cy.log('password is ' + password)
         if (username)
             cy.get(home.ct_Username).type(username)
         if (password)
