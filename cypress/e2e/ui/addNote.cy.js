@@ -1,6 +1,6 @@
-import { home } from "../support/commands/home"
-import {note} from "../support/commands/note"
-import { invalid_note } from "../fixtures/invalid-note"
+import { home } from "../../support/commands/home"
+import {note} from "../../support/commands/note"
+import { invalid_note } from "../../fixtures/invalid-note"
 import 'cypress-axe'
 
 describe ('Successful creation', () => {
@@ -13,7 +13,7 @@ describe ('Successful creation', () => {
     // Since we want to visit the same URL at the start of all our tests,
     // we include it in our beforeEach function so that it runs before each test
     
-    cy.login('thunguyen18.vn@gmail.com','123321a@')
+    cy.login(Cypress.env('username'),Cypress.env('password'))
     cy.visit('/app/login')
   })
   it('Create a note successfully', () => {
@@ -38,11 +38,11 @@ describe ('Successful creation', () => {
     cy.get(note.ct_Options).eq(2).contains('Personal').should('be.visible')
 
     //Step 2: Input into the fields, and click the button Create
-    cy.inputNote(category,title,desc)
+    cy.createNote(category,title,desc)
     // cy.checkA11y('.modal-content',{
     //     skipFailures: true
     //   })
-    cy.get(note.bt_Create).click()
+    
     // Verify if the note is created successfully
     cy.get(home.lb_Note_Item).contains(title).should('be.visible')
   })
@@ -59,7 +59,7 @@ describe('Unsuccessful creation', () => {
     // Since we want to visit the same URL at the start of all our tests,
     // we include it in our beforeEach function so that it runs before each test
     
-    cy.login('thunguyen18.vn@gmail.com','123321a@')
+    cy.login(Cypress.env('username'),Cypress.env('password'))
     cy.visit('/app/login')
   })
   invalid_note.forEach(($item)=>{
@@ -71,11 +71,11 @@ describe('Unsuccessful creation', () => {
       // })
       cy.get(home.bt_Add_Note).click()
       //Step 2: Input into the fields, and click the button Create
-      cy.inputNote(category,title,desc)
+      cy.createNote(category,title,desc)
       // cy.checkA11y('.modal-content',{
       //   skipFailures: true
       // })
-      cy.get(note.bt_Create).click()
+      
       // Verify if the note is created successfully
       if (message1)
         cy.get(note.lb_Feedback).contains(message1).should('be.visible')
