@@ -9,8 +9,8 @@ on:
 jobs:
   cypress-run:
     env:
-      username: 'thunguyen18.vn@gmail.com'
-      password: '123321a@'
+      USERNAME: 'thunguyen18.vn@gmail.com'
+      PASSWORD: '123321a@'
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
