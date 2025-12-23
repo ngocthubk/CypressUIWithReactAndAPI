@@ -9,15 +9,15 @@ on:
 jobs:
   cypress-run:
     env:
-      username: "thunguyen18.vn@gmail.com"
-      password: "123321a@"
+      cypress_username:  ${{secrets.username}}
+      cypress_password: ${{secrets.password}}
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       # Install npm dependencies, cache them correctly
       # and run all Cypress tests
-      - name: cypress run --env "username=thunguyen18.vn@gmail.com"
+      - name: cypress run 
         uses: cypress-io/github-action@v6
         with:
           browser: chrome  

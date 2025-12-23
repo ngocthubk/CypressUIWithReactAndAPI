@@ -14,9 +14,11 @@ export let home = {
 Cypress.Commands.add('login',(username, password ) => {
     cy.session([username, password],() => {
         cy.visit('/app/login')
-    
-        cy.get(home.ct_Username).type(username)
-        cy.get(home.ct_Password).type(password)
+        
+        if (username)
+            cy.get(home.ct_Username).type(username)
+        if (password)
+            cy.get(home.ct_Password).type(password)
         cy.get(home.bt_Login).click()
         cy.url().should('not.include', '/login')
 
