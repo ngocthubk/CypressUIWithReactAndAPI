@@ -7,7 +7,8 @@ export let home = {
     bt_Add_Note: '[data-testid="add-new-note"]',
     lb_Note_Item: '[data-testid="note-card-title"]',
     bt_Delete_Note: '[data-testid="note-delete"]',
-    bt_Confirm_Delete: '[data-testid="note-delete-confirm"]'
+    bt_Confirm_Delete: '[data-testid="note-delete-confirm"]',
+    lb_Note_Container: '[data-testid="note-card"]'
 }
 
 Cypress.Commands.add('login',(username, password ) => {
@@ -18,19 +19,16 @@ Cypress.Commands.add('login',(username, password ) => {
         cy.get(home.ct_Password).type(password)
         cy.get(home.bt_Login).click()
         cy.url().should('not.include', '/login')
-    // },
-    // {
-    //   validate() {
-    //     cy.request('/api/users/login').its('status').should('eq', 200)
-    //   },
-    // }
 
     })
 
 })
 
 Cypress.Commands.add('deleteNote',(title) => {
-    cy.get(home.bt_Delete_Note).contains(title).click()
-    cy.get(home.bt_Confirm_Delete).contains(title).click()
+    cy.get(home.lb_Note_Item)
+    .contains(title)
+    .parent()
+    .get(home.bt_Delete_Note).click()
+    cy.get(home.bt_Confirm_Delete).click()
 
 })
