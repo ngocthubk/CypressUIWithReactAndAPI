@@ -13,7 +13,7 @@ describe ('Successful creation', () => {
     // Since we want to visit the same URL at the start of all our tests,
     // we include it in our beforeEach function so that it runs before each test
     
-    cy.login(Cypress.env('username'),Cypress.env('password'))
+    cy.login(Cypress.env('USERNAME'),Cypress.env('PASSWORD'))
     cy.visit('/app/login')
   })
   it('Create a note successfully', () => {
